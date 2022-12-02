@@ -1,7 +1,6 @@
 package se.aoc2022.day2;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class DayTwoAgent {
 
@@ -40,6 +39,7 @@ public class DayTwoAgent {
     enum Choices {
         ROCK(1), PAPER(2), SCISSORS(3);
         private final int pt;
+
         Choices(final int pt) {
             this.pt = pt;
         }
@@ -53,6 +53,14 @@ public class DayTwoAgent {
                 case ROCK -> PAPER;
                 case PAPER -> SCISSORS;
                 case SCISSORS -> ROCK;
+            };
+        }
+
+        public Choices getStrength() {
+            return switch (this) {
+                case ROCK -> SCISSORS;
+                case PAPER -> ROCK;
+                case SCISSORS -> PAPER;
             };
         }
     }
@@ -71,7 +79,23 @@ public class DayTwoAgent {
             for (String line : guide) {
                 String[] split = line.split(" ");
                 opponent.setChoice(split[0]);
-                player.setChoice(split[1]);
+                player.setChoiceString(split[1]);
+                Round round = new Round(opponent, player);
+                score += round.getScore();
+            }
+            return score;
+        }
+
+        public int playWithStrategy() {
+            int score = 0;
+            for (String line : guide) {
+                String[] split = line.split(" ");
+                opponent.setChoice(split[0]);
+                switch (split[1]) {
+                    case "X" -> player.setChoice(opponent.getChoice().getStrength());
+                    case "Y" -> player.setChoice(opponent.getChoice());
+                    case "Z" -> player.setChoice(opponent.getChoice().getWeakness());
+                };
                 Round round = new Round(opponent, player);
                 score += round.getScore();
             }
@@ -80,33 +104,28 @@ public class DayTwoAgent {
 
     }
 
-    public static class Round {
-        private final Opponent opponent;
-        private final Player player;
-
-        public Round(Opponent opponent, Player player) {
-            this.opponent = opponent;
-            this.player = player;
-        }
+    private record Round(Opponent opponent, Player player) {
 
         public int getScore() {
-            int playerScore = player.getChoice().getPt();
-            if (opponent
-                    .getChoice()
-                    .equals(player.getChoice())) {
-                playerScore += 3;
-            } else if (opponent
-                    .getChoice()
-                    .getWeakness()
-                    .equals(player.getChoice())) {
-                playerScore += 6;
+                int playerScore = player.getChoice().getPt();
+                if (opponent
+                        .getChoice()
+                        .equals(player.getChoice())) {
+                    playerScore += 3;
+                } else if (opponent
+                        .getChoice()
+                        .getWeakness()
+                        .equals(player.getChoice())) {
+                    playerScore += 6;
+                }
+                return playerScore;
             }
-            return playerScore;
         }
-    }
-    public static class Opponent {
+
+    private static class Opponent {
 
         private Choices choice;
+
         public Opponent() {
         }
 
@@ -117,23 +136,31 @@ public class DayTwoAgent {
                 case "C" -> this.choice = Choices.SCISSORS;
             }
         }
+
+
         public Choices getChoice() {
             return choice;
         }
 
     }
+
     public static class Player {
         private Choices choice;
 
         public Player() {
         }
 
-        public void setChoice(String choice) {
+        public void setChoiceString(String choice) {
             switch (choice) {
                 case "X" -> this.choice = Choices.ROCK;
                 case "Y" -> this.choice = Choices.PAPER;
                 case "Z" -> this.choice = Choices.SCISSORS;
+                default -> throw new IllegalStateException("Unexpected value: " + choice);
             }
+        }
+
+        public void setChoice(Choices choice) {
+            this.choice = choice;
         }
 
         public Choices getChoice() {

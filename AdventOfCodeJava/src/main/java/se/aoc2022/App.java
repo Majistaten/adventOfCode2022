@@ -31,8 +31,11 @@ public class App {
     private static void dayTwo() {
         separate("DAY TWO");
         List<String> fileContent = Util.getContentFromFile("day2.txt").toList();
-        int result = new DayTwoAgent.Game(fileContent).play();
+        DayTwoAgent.Game game = new DayTwoAgent.Game(fileContent);
+        int result = game.play();
         System.out.printf("The result is %d%n", result);
+        int secondResult = game.playWithStrategy();
+        System.out.printf("The second result is %d%n", secondResult);
     }
 
 
