@@ -3,6 +3,7 @@ package se.aoc2022;
 import se.aoc2022.day1.DayOneAgent;
 import se.aoc2022.day2.DayTwoAgent;
 import se.aoc2022.day3.DayThreeAgent;
+import se.aoc2022.day4.DayFourAgent;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class App {
         dayOne();
         dayTwo();
         dayThree();
+        dayFour();
     }
 
     private static void separate(String text) {
@@ -46,6 +48,14 @@ public class App {
         DayThreeAgent agent = new DayThreeAgent(fileContent);
         System.out.printf("The sum of all priorities is %d%n", agent.sumPriorities());
         System.out.printf("The sum of all group priorities is %d%n", agent.sumGroupPriorities());
+    }
+
+    private static void dayFour() {
+        separate("DAY FOUR");
+        List<String> fileContent = Util.getContentFromFile("day4.txt").toList();
+        DayFourAgent agent = new DayFourAgent(fileContent);
+        System.out.printf("There are %d groups where one member's sections is fully contained%n", agent.countOverlappingGroups());
+        System.out.printf("Within all groups, there are a total of %d sections overlapping%n", agent.countOverlappingGroupSections());
     }
 
 }

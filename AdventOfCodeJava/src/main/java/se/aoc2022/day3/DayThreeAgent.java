@@ -76,6 +76,12 @@ public class DayThreeAgent {
         return null;
     }
 
+    /**
+     * Find all group badges.
+     *
+     * @param rucksacks list of rucksacks
+     * @return list of group badges
+     */
     private List<String> findCommonGroupItems(List<Rucksack> rucksacks) {
         List<String> groupBadges = new ArrayList<>();
         List<Rucksack> groupRucksacks = new ArrayList<>();
@@ -89,6 +95,12 @@ public class DayThreeAgent {
         return groupBadges;
     }
 
+    /**
+     * Find the common item between the three rucksacks. (group badge)
+     *
+     * @param rucksacks list of rucksacks
+     * @return group badge
+     */
     private String findCommonGroupItem(List<Rucksack> rucksacks) {
         for (String letter : rucksacks.get(0).getItems().split("")) {
             if (rucksacks.get(1).hasItem(letter) && rucksacks.get(2).hasItem(letter)) {
