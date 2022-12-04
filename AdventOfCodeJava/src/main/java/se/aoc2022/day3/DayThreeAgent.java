@@ -29,9 +29,18 @@ public class DayThreeAgent {
      *
      * @return sum of all priorities
      */
-    public int sumPrioroties() {
+    public int sumPriorities() {
         int sum = 0;
-        List<String> commonItems = findCommonItems(this.rucksacks);
+        List<String> commonItems = findCommonCompartmentItems(this.rucksacks);
+        for (String item : commonItems) {
+            sum += getPriority(item);
+        }
+        return sum;
+    }
+
+    public int sumGroupPriorities() {
+        int sum = 0;
+        List<String> commonItems = findCommonGroupItems(this.rucksacks);
         for (String item : commonItems) {
             sum += getPriority(item);
         }
@@ -44,12 +53,49 @@ public class DayThreeAgent {
      * @param rucksacks list of rucksacks
      * @return list of common items
      */
-    private List<String> findCommonItems(List<Rucksack> rucksacks) {
+    private List<String> findCommonCompartmentItems(List<Rucksack> rucksacks) {
         List<String> commonItems = new ArrayList<>();
         for (Rucksack rucksack : rucksacks) {
-            commonItems.add(findCommonItem(rucksack));
+            commonItems.add(findCommonItemInCompartments(rucksack));
         }
         return commonItems;
+    }
+
+    /**
+     * Find the common item between the two compartments of a rucksack.
+     *
+     * @param rucksack rucksack to find common item in
+     * @return common item
+     */
+    private String findCommonItemInCompartments(Rucksack rucksack) {
+        for (String item : rucksack.openFirstCompartment().getItems()) {
+            if (rucksack.openSecondCompartment().hasItem(item)) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    private List<String> findCommonGroupItems(List<Rucksack> rucksacks) {
+        List<String> groupBadges = new ArrayList<>();
+        List<Rucksack> groupRucksacks = new ArrayList<>();
+        for (Rucksack rucksack : rucksacks) {
+            groupRucksacks.add(rucksack);
+            if (groupRucksacks.size() == 3) {
+                groupBadges.add(findCommonGroupItem(groupRucksacks));
+                groupRucksacks.clear();
+            }
+        }
+        return groupBadges;
+    }
+
+    private String findCommonGroupItem(List<Rucksack> rucksacks) {
+        for (String letter : rucksacks.get(0).getItems().split("")) {
+            if (rucksacks.get(1).hasItem(letter) && rucksacks.get(2).hasItem(letter)) {
+                return letter;
+            }
+        }
+        return null;
     }
 
     /**
@@ -66,21 +112,6 @@ public class DayThreeAgent {
             priority = item.charAt(0) - 38;
         }
         return priority;
-    }
-
-    /**
-     * Find the common item between the two compartments of a rucksack.
-     *
-     * @param rucksack rucksack to find common item in
-     * @return common item
-     */
-    private String findCommonItem(Rucksack rucksack) {
-        for (String item : rucksack.openFirstCompartment().getItems()) {
-            if (rucksack.openSecondCompartment().contains(item)) {
-                return item;
-            }
-        }
-        return null;
     }
 
 }

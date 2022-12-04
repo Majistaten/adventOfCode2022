@@ -42,6 +42,24 @@ public class Rucksack {
     }
 
     /**
+     * Get all items stored in the compartments of the rucksack.
+     *
+     * @return list of items contained in the rucksack
+     */
+    public String getItems() {
+        return firstCompartment.getItems().toString() + secondCompartment.getItems().toString();
+    }
+
+    /**
+     * See if the rucksack contains a specific item.
+     * @param item item to look for
+     * @return true if item is in rucksack
+     */
+    public boolean hasItem(String item) {
+        return firstCompartment.hasItem(item) || secondCompartment.hasItem(item);
+    }
+
+    /**
      * Compartments of the rucksack.
      */
     public static class Compartment {
@@ -74,7 +92,7 @@ public class Rucksack {
          * @param item item to check for
          * @return true if the compartment contains the item
          */
-        public boolean contains(String item) {
+        public boolean hasItem(String item) {
             return items.contains(item);
         }
 

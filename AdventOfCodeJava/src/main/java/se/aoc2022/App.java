@@ -44,7 +44,8 @@ public class App {
         separate("DAY THREE");
         List<String> fileContent = Util.getContentFromFile("day3.txt").toList();
         DayThreeAgent agent = new DayThreeAgent(fileContent);
-        System.out.printf("The sum of all priorities is %d%n", agent.sumPrioroties());
+        System.out.printf("The sum of all priorities is %d%n", agent.sumPriorities());
+        System.out.printf("The sum of all group priorities is %d%n", agent.sumGroupPriorities());
     }
 
 }
