@@ -26,14 +26,14 @@ public class App {
     }
 
     private static void dayOne() {
-        separate("DAY ONE");
+        Util.printHeader("DAY ONE");
         List<String> fileContent = Util.getContentFromFile("day1.txt").toList();
         System.out.println(new DayOneAgent().mostCalories(fileContent));
         System.out.println(new DayOneAgent().topThreeCalories(fileContent));
     }
 
     private static void dayTwo() {
-        separate("DAY TWO");
+        Util.printHeader("DAY TWO");
         List<String> fileContent = Util.getContentFromFile("day2.txt").toList();
         DayTwoAgent.Game game = new DayTwoAgent.Game(fileContent);
         int result = game.play();
@@ -43,7 +43,7 @@ public class App {
     }
 
     private static void dayThree() {
-        separate("DAY THREE");
+        Util.printHeader("DAY THREE");
         List<String> fileContent = Util.getContentFromFile("day3.txt").toList();
         DayThreeAgent agent = new DayThreeAgent(fileContent);
         System.out.printf("The sum of all priorities is %d%n", agent.sumPriorities());
@@ -51,7 +51,7 @@ public class App {
     }
 
     private static void dayFour() {
-        separate("DAY FOUR");
+        Util.printHeader("DAY FOUR");
         List<String> fileContent = Util.getContentFromFile("day4.txt").toList();
         DayFourAgent agent = new DayFourAgent(fileContent);
         System.out.printf("There are %d groups where one member's sections is fully contained%n", agent.countOverlappingGroups());

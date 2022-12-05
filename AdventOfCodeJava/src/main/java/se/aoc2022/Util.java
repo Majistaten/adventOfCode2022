@@ -18,6 +18,19 @@ public final class Util {
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
 
+    private final static String sep = String.format("%s*%s~%s",
+            Util.ANSI_RED, Util.ANSI_GREEN, Util.ANSI_RESET);
+
+    public static void printHeader(String headerText) {
+        int len = 60;
+        int textLen = headerText.length();
+        int left = (len - textLen / 2) / 2;
+        int right = len - textLen / 2 - left;
+        String leftSep = sep.repeat(left);
+        String rightSep = sep.repeat(right);
+        System.out.printf("%s %s %s%n", leftSep, headerText, rightSep);
+    }
+
     /**
      * Returns the path to the file with the given name in the common-resources folder.
      *
