@@ -4,6 +4,7 @@ import se.aoc2022.day1.DayOneAgent;
 import se.aoc2022.day2.DayTwoAgent;
 import se.aoc2022.day3.DayThreeAgent;
 import se.aoc2022.day4.DayFourAgent;
+import se.aoc2022.day5.DayFiveAgent;
 
 import java.util.List;
 
@@ -11,19 +12,17 @@ import java.util.List;
  * Hello world!
  */
 public class App {
-    private final static String sep = String.format("%s*%s~%s",
-            Util.ANSI_RED, Util.ANSI_GREEN, Util.ANSI_RESET).repeat(25);
+
 
     public static void main(String[] args) {
         dayOne();
         dayTwo();
         dayThree();
         dayFour();
+        dayFive();
     }
 
-    private static void separate(String text) {
-        System.out.println(sep + text + sep);
-    }
+
 
     private static void dayOne() {
         Util.printHeader("DAY ONE");
@@ -56,6 +55,13 @@ public class App {
         DayFourAgent agent = new DayFourAgent(fileContent);
         System.out.printf("There are %d groups where one member's sections is fully contained%n", agent.countOverlappingGroups());
         System.out.printf("Within all groups, there are a total of %d sections overlapping%n", agent.countOverlappingGroupSections());
+    }
+
+    private static void dayFive() {
+        Util.printHeader("DAY FIVE");
+        List<String> fileContent = Util.getContentFromFile("day5.txt").toList();
+        DayFiveAgent agent = new DayFiveAgent(fileContent);
+        System.out.printf("The crates in the top of each stack is %s%n", agent.getTopCrates());
     }
 
 }
