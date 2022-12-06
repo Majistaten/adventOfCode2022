@@ -12,12 +12,20 @@ public class CraneOperator {
         this.commands = commands;
     }
 
+    /**
+     * Execute all commands in the list.
+     */
     public void moveCrates() {
         for (Command command : commands) {
             crane.moveCrates(command);
         }
     }
 
+    /**
+     * Get the label of the crates on top of each stack.
+     *
+     * @return label of the crates on top of each stack
+     */
     public String getTopCrates() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < crane.crateStacks.size(); i++) {

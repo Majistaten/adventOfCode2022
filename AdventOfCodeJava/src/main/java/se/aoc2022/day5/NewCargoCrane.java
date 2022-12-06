@@ -9,11 +9,15 @@ public class NewCargoCrane extends CargoCrane {
         super(crateStacks);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void moveCrates(final Command command) {
         int moveCrates = command.getCommand(Command.CommandName.MOVE);
         int fromStack = command.getCommand(Command.CommandName.FROM);
         int toStack = command.getCommand(Command.CommandName.TO);
+
         // Move moveCrates from fromStack and place them in the same order on toStack
         Stack<Character> crates = new Stack<>();
         for (int i = 0; i < moveCrates; i++) {

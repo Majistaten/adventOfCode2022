@@ -10,6 +10,11 @@ public class CargoCrane {
         this.crateStacks = crateStacks;
     }
 
+    /**
+     * Moves a crate from one "stack" to another.
+     *
+     * @param command command to move the crate
+     */
     public void moveCrates(Command command) {
         int moveCrates = command.getCommand(Command.CommandName.MOVE);
         int fromStack = command.getCommand(Command.CommandName.FROM);

@@ -13,6 +13,12 @@ public class DayFiveAgent {
         this.newCraneOperator = new CraneOperator(newCrane, extractMoveCommands(fileContent));
     }
 
+    /**
+     * Extracts the current placement of crates in each stack from the file content.
+     *
+     * @param fileContent file content
+     * @return list of stacks with the placement of crates in each stack
+     */
     private List<Deque<Character>> extractCrateStacks(List<String> fileContent) {
 
         List<Deque<Character>> stacks = new ArrayList<>();
@@ -35,6 +41,12 @@ public class DayFiveAgent {
         return stacks;
     }
 
+    /**
+     * Extracts the commands to move crates from the file content.
+     *
+     * @param fileContent file content
+     * @return list of commands to move crates
+     */
     private List<Command> extractMoveCommands(List<String> fileContent) {
 
         List<Command> commands = new ArrayList<>();
@@ -53,11 +65,21 @@ public class DayFiveAgent {
         return commands;
     }
 
+    /**
+     * Get the label of the crates on the top of each stack after all commands have been executed.
+     *
+     * @return label of the crates on the top of each stack
+     */
     public String getTopCrates() {
         craneOperator.moveCrates();
         return craneOperator.getTopCrates();
     }
 
+    /**
+     * Get the label of the crates on the top of each stack after all commands have been executed by the new crane.
+     *
+     * @return label of the crates on the top of each stack
+     */
     public String getTopCratesNew() {
         newCraneOperator.moveCrates();
         return newCraneOperator.getTopCrates();
