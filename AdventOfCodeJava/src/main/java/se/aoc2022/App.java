@@ -62,6 +62,7 @@ public class App {
         List<String> fileContent = Util.getContentFromFile("day5.txt").toList();
         DayFiveAgent agent = new DayFiveAgent(fileContent);
         System.out.printf("The crates in the top of each stack is %s%n", agent.getTopCrates());
+        System.out.printf("The crates in the top of each stack set by the new crane is %s%n", agent.getTopCratesNew());
     }
 
 }

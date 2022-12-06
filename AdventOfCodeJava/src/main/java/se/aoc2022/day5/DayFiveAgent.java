@@ -1,30 +1,65 @@
 package se.aoc2022.day5;
 
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class DayFiveAgent {
+    private final CraneOperator craneOperator;
+    private final CraneOperator newCraneOperator;
 
     public DayFiveAgent(List<String> fileContent) {
-
+        CargoCrane crane = new CargoCrane(extractCrateStacks(fileContent));
+        CargoCrane newCrane = new NewCargoCrane(extractCrateStacks(fileContent));
+        this.craneOperator = new CraneOperator(crane, extractMoveCommands(fileContent));
+        this.newCraneOperator = new CraneOperator(newCrane, extractMoveCommands(fileContent));
     }
 
-    private List<Stack<String>> extractCrateStacks(List<String> fileContent) {
-        // Divide each line in parts of four characters.
-        // Each part index is a stack of crates and if the part contains [?] it means that a crate should be put in the
-        // stack. The first crate to come by is on top of the stack, so the stacks need to be reversed. A dequeue could
-        // be a better data structure for this.
-        // Break loop if line contains numbers or something else than [?]
-        return null;
+    private List<Deque<Character>> extractCrateStacks(List<String> fileContent) {
+
+        List<Deque<Character>> stacks = new ArrayList<>();
+
+        for (int i = 0; i <= fileContent.get(0).length() / 4 ; i++) {
+            stacks.add(new ArrayDeque<>());
+        }
+        for (String line : fileContent) {
+            if (line.charAt(0) != '[') {
+                break;
+            }
+            for (int i = 0; i <= line.length() / 4 ; i++) {
+                char crate = line.charAt(i * 4 + 1);
+                if (crate == ' ') {
+                    continue;
+                }
+                stacks.get(i).addFirst(crate);
+            }
+        }
+        return stacks;
     }
 
-    private List<String> extractMoveCommands(List<String> fileContent) {
-        // Each line is a set of commands with keywords ["move", "from", "to"].
-        // Separate each line by " " and extract command and the next index. Store in a command object.
-        return null;
+    private List<Command> extractMoveCommands(List<String> fileContent) {
+
+        List<Command> commands = new ArrayList<>();
+
+        for (String line : fileContent) {
+            if (!line.contains("move")) {
+                continue;
+            }
+            String[] parts = line.split(" ");
+            int moveCrates = Integer.parseInt(parts[1]);
+            int fromStack = Integer.parseInt(parts[3]);
+            int toStack = Integer.parseInt(parts[5]);
+            commands.add(new Command(moveCrates, fromStack, toStack));
+        }
+
+        return commands;
     }
 
     public String getTopCrates() {
-        return null;
+        craneOperator.moveCrates();
+        return craneOperator.getTopCrates();
+    }
+
+    public String getTopCratesNew() {
+        newCraneOperator.moveCrates();
+        return newCraneOperator.getTopCrates();
     }
 }
