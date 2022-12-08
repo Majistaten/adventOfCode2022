@@ -5,6 +5,7 @@ import se.aoc2022.day2.DayTwoAgent;
 import se.aoc2022.day3.DayThreeAgent;
 import se.aoc2022.day4.DayFourAgent;
 import se.aoc2022.day5.DayFiveAgent;
+import se.aoc2022.day6.DaySixAgent;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class App {
         dayThree();
         dayFour();
         dayFive();
+        daySix();
     }
 
 
@@ -63,6 +65,14 @@ public class App {
         DayFiveAgent agent = new DayFiveAgent(fileContent);
         System.out.printf("The crates in the top of each stack is %s%n", agent.getTopCrates());
         System.out.printf("The crates in the top of each stack set by the new crane is %s%n", agent.getTopCratesNew());
+    }
+
+    private static void daySix() {
+        Util.printHeader("DAY SIX");
+        List<String> fileContent = Util.getContentFromFile("day6.txt").toList();
+        DaySixAgent agent = new DaySixAgent(fileContent);
+        System.out.printf("The first signal is found at index %s%n", agent.lockOnToSignal());
+        System.out.printf("The first start of message is found at index %s%n", agent.findStartOfMessage());
     }
 
 }
