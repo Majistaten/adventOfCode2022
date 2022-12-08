@@ -6,6 +6,7 @@ import se.aoc2022.day3.DayThreeAgent;
 import se.aoc2022.day4.DayFourAgent;
 import se.aoc2022.day5.DayFiveAgent;
 import se.aoc2022.day6.DaySixAgent;
+import se.aoc2022.day7.DaySevenAgent;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class App {
         dayFour();
         dayFive();
         daySix();
+        daySeven();
     }
 
 
@@ -73,6 +75,13 @@ public class App {
         DaySixAgent agent = new DaySixAgent(fileContent);
         System.out.printf("The first signal is found at index %s%n", agent.lockOnToSignal());
         System.out.printf("The first start of message is found at index %s%n", agent.findStartOfMessage());
+    }
+
+    private static void daySeven() {
+        Util.printHeader("DAY SEVEN");
+        List<String> fileContent = Util.getContentFromFile("day7.txt").toList();
+        DaySevenAgent agent = new DaySevenAgent(fileContent);
+
     }
 
 }
