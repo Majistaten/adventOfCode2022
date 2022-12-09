@@ -81,6 +81,8 @@ public class App {
         Util.printHeader("DAY SEVEN");
         List<String> fileContent = Util.getContentFromFile("day7.txt").toList();
         DaySevenAgent agent = new DaySevenAgent(fileContent);
+        System.out.printf("The sum of the total sizes for directories smaller than 100000 is: %s%n", agent.solvePartOne());
+        System.out.printf("Size of the directory to remove is: %s%n", agent.solvePartTwo());
 
     }
 
