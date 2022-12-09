@@ -1,12 +1,15 @@
 package se.aoc2022;
 
 import se.aoc2022.day1.DayOneAgent;
+import se.aoc2022.day10.DayTenAgent;
 import se.aoc2022.day2.DayTwoAgent;
 import se.aoc2022.day3.DayThreeAgent;
 import se.aoc2022.day4.DayFourAgent;
 import se.aoc2022.day5.DayFiveAgent;
 import se.aoc2022.day6.DaySixAgent;
 import se.aoc2022.day7.DaySevenAgent;
+import se.aoc2022.day8.DayEightAgent;
+import se.aoc2022.day9.DayNineAgent;
 
 import java.util.List;
 
@@ -24,6 +27,9 @@ public class App {
         dayFive();
         daySix();
         daySeven();
+        dayEight();
+        dayNine();
+        dayTen();
     }
 
 
@@ -83,6 +89,30 @@ public class App {
         DaySevenAgent agent = new DaySevenAgent(fileContent);
         System.out.printf("The sum of the total sizes for directories smaller than 100000 is: %s%n", agent.solvePartOne());
         System.out.printf("Size of the directory to remove is: %s%n", agent.solvePartTwo());
+
+    }
+
+    private static void dayEight() {
+        Util.printHeader("DAY EIGHT");
+        List<String> fileContent = Util.getContentFromFile("day8.txt").toList();
+        DayEightAgent agent = new DayEightAgent(fileContent);
+        System.out.printf("Not yet implemented %n");
+
+    }
+
+    private static void dayNine() {
+        Util.printHeader("DAY NINE");
+        List<String> fileContent = Util.getContentFromFile("day9.txt").toList();
+        DayNineAgent agent = new DayNineAgent(fileContent);
+        System.out.printf("Not yet implemented %n");
+
+    }
+
+    private static void dayTen() {
+        Util.printHeader("DAY TEN");
+//        List<String> fileContent = Util.getContentFromFile("day10.txt").toList();
+//        DayTenAgent agent = new DayTenAgent(fileContent);
+        System.out.printf("Not yet implemented %n");
 
     }
 
