@@ -96,7 +96,8 @@ public class App {
         Util.printHeader("DAY EIGHT");
         List<String> fileContent = Util.getContentFromFile("day8.txt").toList();
         DayEightAgent agent = new DayEightAgent(fileContent);
-        System.out.printf("Not yet implemented %n");
+        System.out.printf("There are a total of %s visible trees in the forest.%n", agent.countVisibleTrees());
+        System.out.printf("The tree with the highest score have: %s %n", agent.maxScore());
 
     }
 
